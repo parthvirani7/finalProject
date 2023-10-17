@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Location and Online Status</title>
+  </head>
+  <body onload="checkOnlineStatus(); getLocation();">
+    <h2>User Location and Online Status</h2>
+    <i>
+      <div style="display: flex; align-items: center">
+        <p>
+          Online Status:
+          <span id="online-status">
+            <div
+              id="online-status2"
+              style="
+                width: 20px;
+                height: 20px;
+                background-color: green;
+                border-radius: 20px;
+                display: inline-block;
+                margin-left: 5px;
+              "
+            ></div>
+          </span>
+        </p>
+      </div>
+    </i>
+    <h3 id="location1">Getting location...</h3>
+    <h3 id="location2">Getting location...</h3>
+  </body>
+  <script>
+    //cheak online status
+    function checkOnlineStatus() {
+      if (navigator.onLine) {
+        document.getElementById("online-status").style.color = "green";
+        document.getElementById("online-status2").style.backgroundColor =
+          "green";
+        document.getElementById("online-status").innerHTML = "Online";
+      } else {
+        document.getElementById("online-status").style.color = "red";
+        document.getElementById("online-status2").style.backgroundColor = "red";
+        document.getElementById("online-status").innerHTML = "Offline";
+      }
+    }
+
+    // get location
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+    function showPosition(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      document.getElementById("location1").innerHTML = "Latitude: " + latitude;
+      document.getElementById("location2").innerHTML =
+        "Longitude: " + longitude;
+
+      console.log(latitude, longitude);
+    }
+  </script>
+</html>
